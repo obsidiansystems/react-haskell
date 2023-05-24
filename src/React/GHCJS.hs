@@ -49,7 +49,7 @@ import GHCJS.Marshal as X
 import GHCJS.Types as X
 import GHCJS.DOM (currentDocument)
 import GHCJS.DOM.Types (Document, Element)
-import GHCJS.DOM.Document (documentGetElementById)
+import GHCJS.DOM.NonElementParentNode (getElementById)
 
 #else
 

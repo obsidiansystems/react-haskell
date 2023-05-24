@@ -1,8 +1,8 @@
 with (import <nixpkgs> {}).pkgs;
-let modifiedHaskellPackages = haskellngPackages.override {
+let modifiedHaskellPackages = haskellPackages.override {
       overrides = self: super: {
-        ghcjs-base = haskellngPackages.ghcjs-base;
-        ghcjs-prim = haskellngPackages.ghcjs-prim;
+        ghcjs-base = haskellPackages.ghcjs-base;
+        ghcjs-prim = haskellPackages.ghcjs-prim;
         react-haskell = self.callPackage ./. {};
       };
     };

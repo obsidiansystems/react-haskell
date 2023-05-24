@@ -10,7 +10,9 @@ module React.GHCJS
     , Document
     , Element
     , JSAny
-    , documentGetElementById
+    , getElementById
+    , ToJSRef
+    , toJSRef
 
     -- * GHCJS stubs
 #ifdef __GHCJS__
@@ -47,10 +49,22 @@ import Data.Text (Text)
 import GHCJS.Foreign as X
 import GHCJS.Marshal as X
 import GHCJS.Types as X
+import GHCJS.Foreign.Callback as X
 import GHCJS.DOM (currentDocument)
 import GHCJS.DOM.Types (Document, Element)
 import GHCJS.DOM.NonElementParentNode (getElementById)
 
+class FromJSRef a where
+    fromJSRef :: JSRef a -> IO (Maybe a)
+
+class ToJSRef a where
+    toJSRef :: a -> IO (JSRef a)
+
+class ToJSString a where
+    toJSString :: a -> JSString
+
+class FromJSString a where
+    fromJSString :: JSString -> a
 #else
 
 data Document
@@ -95,7 +109,7 @@ currentDocument = undefined
 documentGetElementById ::
     -- (IsDocument self, ToJSString elementId) =>
     self -> elementId -> IO (Maybe Element)
-documentGetElementById = undefined
+documentGetElementById = getElementById
 
 castRef :: JSRef a -> JSRef b
 castRef _ = JSRef
